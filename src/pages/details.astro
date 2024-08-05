@@ -10,7 +10,7 @@ const languages = [
 const item = Astro.url.searchParams.get('item');
 const language = languages.find(lang => lang.name === item);
 
-const title = language ? `Sobre ${language.name}` : 'Language Not Found';
+const title = language ? `Sobre ${language.name}` : 'No encontrado';
 ---
 
 <Layout title={title}>
