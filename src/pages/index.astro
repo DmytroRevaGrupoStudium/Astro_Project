@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+
+const languages = [
+    { name: 'Java', url: 'https://miro.medium.com/v2/resize:fit:2560/1*2XrX0fP0htyTCah7AglTig.jpeg', text: 'Java programming language' },
+    { name: 'Python', url: 'https://visionyvalor.es/wp-content/uploads/2024/03/Python-Symbol_0-3.png', text: 'Python programming language' },
+    { name: 'PHP', url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/PHP-logo.svg/640px-PHP-logo.svg.png', text: 'PHP programming language' }
+];
+---
+
+<Layout title="Programming Languages">
+    <main>
+        <h1>Programming Languages</h1>
+        <div class="image-row">
+            {languages.map(language => (
+                <Card href={`/details?item=${language.name}`} img={language.url} body={language.text} alt={language.name} />
+            ))}
+        </div>
+    </main>
+</Layout>
+
+<style>
+    main {
+        margin: auto;
+        padding: 1rem;
+        width: 800px;
+        max-width: calc(100% - 2rem);
+        color: white;
+        font-size: 20px;
+        line-height: 1.6;
+    }
+    .image-row {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 2rem;
+    }
+</style>
