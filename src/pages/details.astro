@@ -7,49 +7,26 @@ const languages = [
     { name: 'PHP', url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/PHP-logo.svg/640px-PHP-logo.svg.png', text: 'PHP programming language' }
 ];
 
-languages;
+const item = Astro.url.searchParams.get('item');
+const language = languages.find(lang => lang.name === item);
+
+const title = language ? `Sobre ${language.name}` : 'Language Not Found';
 ---
 
-<Layout title="Sobre ">
+<Layout title={title}>
     <main>
-        <h1 id="language-title">Sobre</h1>
-        <div id="language-content" class="language-content">
-            <img id="language-image" src="" alt="Language Image" class="language-image">
-            <p id="language-text"></p>
-        </div>
-        <a href="/">Volver</a>
+        <h1>{title}</h1>
+        {language ? (
+            <div class="language-content">
+                <img src={language.url} alt={`${language.name} logo`} class="language-image">
+                <p>{language.text}</p>
+            </div>
+        ) : (
+            <p>Language not found</p>
+        )}
+        <a href="/">Back to home</a>
     </main>
 </Layout>
-
-<script define:vars={{ languages }}>
-    document.addEventListener('DOMContentLoaded', () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const item = urlParams.get('item');
-
-        const language = languages.find(lang => lang.name === item);
-
-        if (language) {
-            // Actualizar el título
-            document.title = `Sobre ${language.name}`;
-            document.getElementById('language-title').textContent = `Sobre ${language.name}`;
-
-            // Actualizar la imagen
-            const imgElement = document.getElementById('language-image');
-            if (imgElement) {
-                imgElement.src = language.url;
-                imgElement.alt = `${language.name} logo`;
-            }
-
-            // Actualizar el texto
-            const textElement = document.getElementById('language-text');
-            if (textElement) {
-                textElement.textContent = language.text;
-            }
-        } else {
-            document.getElementById('language-content').textContent = 'Lenguaje desconocido';
-        }
-    });
-</script>
 
 <style>
     main {
